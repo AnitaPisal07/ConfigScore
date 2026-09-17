@@ -308,7 +308,7 @@ def generate_pdf_report(scan_result, output_stream=None):
     story.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor("#94a3b8"), spaceAfter=10))
     disclaimer_text = (
         "<b>Notice & Ethical Usage Statement:</b> ConfigScore is an educational website configuration assessment tool "
-        "built as a B.Sc. Computer Science final-year major project. It performs safe, passive HTTP header, TLS handshake, "
+        "built as a website configuration assessment tool. It performs safe, passive HTTP header, TLS handshake, "
         "and DNS inspection. It does not perform active exploitation, fuzzing, or vulnerability exploitation. "
         "Users must ensure they own or have permission to audit any scanned domain."
     )

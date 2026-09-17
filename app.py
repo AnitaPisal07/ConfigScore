@@ -1,7 +1,7 @@
 """
 ConfigScore — Website Security Scanner
 Main Flask Application
-B.Sc. Computer Science Final-Year Major Project
+Website Security Scanner
 """
 
 import io
@@ -206,7 +206,7 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5050))
     print("\n" + "=" * 60)
     print("  ConfigScore — Website Security Scanner")
-    print("  B.Sc. Computer Science Final-Year Project")
+    print("  Website Security Scanner")
     print(f"  Starting local server at http://127.0.0.1:{port}")
     print("=" * 60 + "\n")
     app.run(host="127.0.0.1", port=port, debug=True)

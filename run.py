@@ -43,7 +43,7 @@ def check_and_install_dependencies():
 def main():
     print("=" * 65)
     print("   ConfigScore: Website Security Scanner & Remediation Solver   ")
-    print("   B.Sc. Computer Science Final-Year Major Project")
+    print("   Website Security Scanner")
     print("=" * 65)
     
     check_and_install_dependencies()

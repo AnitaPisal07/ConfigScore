@@ -1,7 +1,7 @@
 /**
  * ConfigScore — Website Security Scanner
  * Interactive Client-Side JavaScript
- * B.Sc. Computer Science Final-Year Major Project
+ * Website Security Scanner
  */
 
 document.addEventListener('DOMContentLoaded', function () {
