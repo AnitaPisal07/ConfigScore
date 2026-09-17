@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Cyber Security Knowledge Hub — 20 Security Controls — ConfigScore{% endblock %}
+
+{% block content %}
+<section class="section cyber-hub-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <div class="hero-badge">
+                <span class="badge-dot"></span> Security Controls & Standards Guide
+            </div>
+            <h1 class="section-title">Cyber Security Knowledge Hub</h1>
+            <p class="section-subtitle">
+                Explore comprehensive deep dives into all 20 passive security controls evaluated by ConfigScore. Each topic explains the underlying threat model, vulnerability scenarios, and configuration remediation.
+            </p>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="category-nav-wrap">
+            <div class="category-pill-group" id="categoryFilters">
+                <button type="button" class="category-pill active" data-cat="all">All Controls (20)</button>
+                <button type="button" class="category-pill" data-cat="Transport & Encryption">Transport & Encryption (7)</button>
+                <button type="button" class="category-pill" data-cat="Browser Hardening">Browser Hardening (6)</button>
+                <button type="button" class="category-pill" data-cat="Session & Cookies">Session & Cookies (3)</button>
+                <button type="button" class="category-pill" data-cat="Information Disclosure">Information Disclosure (3)</button>
+                <button type="button" class="category-pill" data-cat="Domain & Infrastructure">Domain & Infrastructure (1)</button>
+            </div>
+        </div>
+
+        <!-- Grid of All 20 Topics -->
+        <div class="topics-grid" id="topicsGrid">
+            {% for topic in all_topics %}
+                <div class="topic-card" data-category="{{ topic.category }}">
+                    <div class="topic-card-top">
+                        <span class="topic-category-tag">{{ topic.category }}</span>
+                        <span class="badge {% if topic.importance == 'Critical' %}badge-danger{% elif topic.importance == 'High' %}badge-orange{% elif topic.importance == 'Medium' %}badge-warning{% else %}badge-info{% endif %}">
+                            {{ topic.importance }}
+                        </span>
+                    </div>
+
+                    <h3 class="topic-card-title">{{ topic.title }}</h3>
+                    <p class="topic-card-desc">{{ topic.short_description }}</p>
+
+                    <div class="topic-card-footer">
+                        <span class="topic-weight">Weight: {{ topic.weight }} pts</span>
+                        <a href="{{ url_for('topic_detail', slug=topic.slug) }}" class="btn btn-sm btn-outline btn-deep-dive">
+                            Deep Dive
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Defensive Guidance Banner -->
+        <div class="defense-banner-box">
+            <div class="defense-banner-content">
+                <h3>Want to test these controls on your website?</h3>
+                <p>Launch an automated passive scan to verify which of these 20 controls are correctly configured on your server.</p>
+            </div>
+            <a href="{{ url_for('scanner') }}" class="btn btn-primary">Start Website Audit &rarr;</a>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

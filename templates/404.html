@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found — ConfigScore{% endblock %}
+
+{% block content %}
+<section class="section error-section">
+    <div class="container text-center">
+        <div class="error-box">
+            <span class="error-code">404</span>
+            <h1 class="error-title">Security Target or Resource Not Found</h1>
+            <p class="error-text">
+                {{ error_message or "The requested page, scan record, or security topic could not be located." }}
+            </p>
+            <div class="error-actions">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Return to Home</a>
+                <a href="{{ url_for('scanner') }}" class="btn btn-secondary">Run Website Scan</a>
+                <a href="{{ url_for('cyber_security') }}" class="btn btn-outline">Browse 20 Topics</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
