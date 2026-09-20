@@ -210,3 +210,7 @@ if __name__ == "__main__":
     print(f"  Starting local server at http://127.0.0.1:{port}")
     print("=" * 60 + "\n")
     app.run(host="127.0.0.1", port=port, debug=True)
+@app.route("/landing")
+def landing():
+    """Render the professional landing page."""
+    return render_template("landing.html")
