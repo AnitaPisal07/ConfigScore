@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConfigScore – Secure Your Website</title>
+  <!-- Tailwind CSS CDN (for quick prototype) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+</head>
+<body class="bg-primary text-gray-900 font-sans">
+  <!-- Navbar -->
+  <header class="bg-white shadow-md fixed w-full z-10 top-0">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <a href="{{ url_for('index') }}" class="text-2xl font-bold text-purple-700">
+        Config<span class="text-purple-900">Score</span>
+      </a>
+      <nav class="hidden md:flex space-x-6">
+        <a href="{{ url_for('index') }}" class="text-gray-700 hover:text-purple-600">Home</a>
+        <a href="{{ url_for('insights') }}" class="text-gray-700 hover:text-purple-600">Insights</a>
+        <a href="{{ url_for('cyber_security') }}" class="text-gray-700 hover:text-purple-600">Topics</a>
+        <a href="{{ url_for('scanner') }}" class="text-gray-700 hover:text-purple-600">Scan</a>
+        <a href="{{ url_for('about') }}" class="text-gray-700 hover:text-purple-600">About</a>
+      </nav>
+      <button id="nav-toggle" class="md:hidden focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="pt-24 bg-primary bg-gradient-to-r from-purple-50 to-white min-h-screen flex items-center">
+    <div class="container mx-auto px-6 lg:flex lg:items-center lg:justify-between">
+      <div class="lg:w-1/2">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+          Secure Your Web Presence with a Single Click
+        </h1>
+        <p class="text-lg text-gray-700 mb-6">
+          ConfigScore scans your website for common misconfigurations, provides a clear risk score, and suggests actionable fixes—no code changes required.
+        </p>
+        <a href="{{ url_for('scanner') }}" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-md transition">
+          Start Scan
+        </a>
+      </div>
+      <div class="mt-12 lg:mt-0 lg:w-1/2 flex justify-center">
+        <img src="{{ url_for('static', filename='img/hero-illustration.svg') }}" alt="Security illustration" class="w-3/4 max-w-sm" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Highlights -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+      <div class="text-center p-4">
+        <svg class="mx-auto w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/></svg>
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Instant Scoring</h3>
+        <p class="mt-2 text-gray-600">Get a risk score in seconds, not minutes.</p>
+      </div>
+      <div class="text-center p-4">
+        <svg class="mx-auto w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"/></svg>
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Actionable Fixes</h3>
+        <p class="mt-2 text-gray-600">Clear, step‑by‑step recommendations for each finding.</p>
+      </div>
+      <div class="text-center p-4">
+        <svg class="mx-auto w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01"/></svg>
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Privacy First</h3>
+        <p class="mt-2 text-gray-600">All scans are passive; no payloads or exploits are run.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-200 py-8">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2026 ConfigScore. All rights reserved.</p>
+      <div class="mt-4 space-x-4">
+        <a href="#" class="hover:text-purple-400">Privacy Policy</a>
+        <a href="#" class="hover:text-purple-400">Terms of Service</a>
+        <a href="#" class="hover:text-purple-400">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.querySelector('nav');
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
