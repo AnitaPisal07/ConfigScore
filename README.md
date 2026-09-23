@@ -246,6 +246,6 @@ ConfigScore is an **educational and defensive** security tool. It performs only 
 
 <div align="center">
 
-**Built with ❤️ using Python & Flask**
+**Built with ❤️ by Anita — using Python & Flask**
 
 </div>
