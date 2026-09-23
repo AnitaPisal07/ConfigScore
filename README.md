@@ -1,251 +1,277 @@
-<div align="center">
+# ConfigScore – Website Security Scanner
 
-# 🛡️ ConfigScore
+ConfigScore is a student-built web application for checking common website security configurations.
 
-### Website Security Scanner & Configuration Auditor
+It performs passive security checks on HTTP/HTTPS responses, TLS settings, cookies, and DNS records. The scanner then gives a security score, shows individual findings, and provides practical suggestions for fixing missing configurations.
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
-[![Flask](https://img.shields.io/badge/Flask-3.0+-000000?style=flat&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+> **Ethical use:** Only scan websites that you own or have explicit permission to test.
 
-**ConfigScore** is an automated, passive website security assessment tool that evaluates HTTP security headers, TLS configurations, cookie protections, and DNS policies — generating a scored audit report with actionable remediation guidance.
+## About the Project
 
-[Features](#-features) · [Screenshots](#-screenshots) · [Installation](#-installation) · [Usage](#-usage) · [Security Checks](#-security-checks) · [Tech Stack](#-tech-stack)
+ConfigScore was developed as a **Third Year B.Sc. Computer Science project** to understand how common web security configurations can be checked programmatically.
 
-</div>
+The project focuses on:
 
----
+- Checking common website security configurations
+- Showing a simple security score and risk level
+- Explaining individual security findings
+- Providing practical remediation examples
+- Learning about HTTP security headers, TLS, cookies, and DNS security
+- Generating a PDF report of scan results
 
-## 📌 About
+The scanner is designed to be **passive and non-intrusive**. It does not send exploitation payloads.
 
-ConfigScore performs **defensive, non-intrusive** security audits on websites. It sends standard HTTP/HTTPS requests and inspects the server's response headers, TLS certificate chain, cookie attributes, and DNS records — without sending any exploitation payloads.
+## Main Features
 
-The tool is designed for:
-- **Web developers** who want to verify their server's security configuration
-- **Computer Science students** learning about web security concepts
-- **System administrators** performing quick compliance checks
+- 20-point website security scan
+- Security score from 0–100
+- Risk level for scan results
+- HTTP security header checks
+- TLS and certificate checks
+- Cookie security checks
+- DNS security checks
+- Server information leakage checks
+- HTTP-to-HTTPS redirect tracking
+- SSRF protection for internal/private addresses
+- Individual security findings
+- Practical remediation guidance
+- Security topic / Deep Dive pages
+- PDF security reports
+- Responsive web interface
 
-> ⚠️ **Ethical Use Only** — Only scan websites you own or have explicit authorization to test.
+## Security Checks
 
----
+ConfigScore currently checks these 20 areas:
 
-## ✨ Features
+| # | Security Check | Category |
+|---|---|---|
+| 1 | HTTPS | Transport & Encryption |
+| 2 | HSTS | Transport & Encryption |
+| 3 | Content Security Policy (CSP) | Header Security |
+| 4 | X-Frame-Options | Header Security |
+| 5 | X-Content-Type-Options | Header Security |
+| 6 | X-XSS-Protection | Header Security |
+| 7 | Referrer-Policy | Header Security |
+| 8 | Permissions-Policy | Header Security |
+| 9 | Secure Cookies | Cookie Security |
+| 10 | HttpOnly Cookies | Cookie Security |
+| 11 | SameSite Cookies | Cookie Security |
+| 12 | TLS Version | Transport & Encryption |
+| 13 | Certificate Validity | Transport & Encryption |
+| 14 | Certificate Chain | Transport & Encryption |
+| 15 | DNS CAA Records | DNS Security |
+| 16 | DNSSEC | DNS Security |
+| 17 | Server Header Leakage | Information Disclosure |
+| 18 | X-Powered-By Leakage | Information Disclosure |
+| 19 | HTTP to HTTPS Redirect | Transport & Encryption |
+| 20 | Mixed Content | Transport & Encryption |
 
-| Feature | Description |
-|---------|-------------|
-| 🔍 **20-Point Security Scan** | Evaluates 20 essential security controls against OWASP, RFC, and NIST standards |
-| 📊 **Risk Scoring (0–100)** | Weighted deduction algorithm with clear risk levels (Low / Medium / High / Critical) |
-| 📄 **PDF Audit Reports** | Downloadable professional PDF report generated with ReportLab |
-| 📚 **20 Deep-Dive Topic Pages** | Each security check links to a dedicated learning page with attack scenarios, fix examples, and references |
-| 🔒 **Passive & Safe** | No exploit payloads, no intrusive probes — only standard HTTP, TLS, and DNS queries |
-| 🧭 **Redirect Chain Tracking** | Follows and visualizes the full HTTP redirect path |
-| 🛡️ **SSRF Protection** | Built-in safeguards prevent scanning of internal/private IP ranges |
-| 🎨 **Modern UI** | Clean, responsive interface with a purple-themed design |
+Each check can return one of these statuses:
 
----
+- **PASS** – The configuration was detected and passed the check.
+- **WARNING** – The configuration needs attention.
+- **MISSING** – The expected security configuration was not found.
+- **REVIEW** – The result needs manual review.
 
-## 🖼️ Screenshots
+## How the Scanner Works
 
-> _Add screenshots of your running application here before pushing to GitHub._
->
-> Example:
-> ```
-> ![Home Page](screenshots/home.png)
-> ![Scan Result](screenshots/result.png)
-> ```
+The basic flow is:
 
----
+```text
+Enter Website URL
+       ↓
+Validate URL
+       ↓
+Perform Passive Checks
+       ↓
+HTTP / HTTPS / TLS / Cookie / DNS Analysis
+       ↓
+Calculate Security Score
+       ↓
+Show Findings & Recommendations
+       ↓
+Generate PDF Report
+```
 
-## 🔐 Security Checks
+## Deep Dive Topics
 
-ConfigScore evaluates the following **20 security controls**:
+The project includes dedicated pages for the security topics checked by the scanner.
 
-| # | Check | Category | Risk if Missing |
-|---|-------|----------|-----------------|
-| 1 | **HTTPS** | Transport & Encryption | Critical |
-| 2 | **HSTS** (Strict-Transport-Security) | Transport & Encryption | High |
-| 3 | **Content-Security-Policy** | Header Security | High |
-| 4 | **X-Frame-Options** | Header Security | Medium |
-| 5 | **X-Content-Type-Options** | Header Security | Medium |
-| 6 | **X-XSS-Protection** | Header Security | Low |
-| 7 | **Referrer-Policy** | Header Security | Medium |
-| 8 | **Permissions-Policy** | Header Security | Medium |
-| 9 | **Secure Cookies** | Cookie Security | High |
-| 10 | **HttpOnly Cookies** | Cookie Security | High |
-| 11 | **SameSite Cookies** | Cookie Security | Medium |
-| 12 | **TLS Version** | Transport & Encryption | Critical |
-| 13 | **Certificate Validity** | Transport & Encryption | Critical |
-| 14 | **Certificate Chain** | Transport & Encryption | High |
-| 15 | **DNS CAA Records** | DNS Security | Medium |
-| 16 | **DNSSEC** | DNS Security | Medium |
-| 17 | **Server Header Leakage** | Information Disclosure | Low |
-| 18 | **X-Powered-By Leakage** | Information Disclosure | Low |
-| 19 | **HTTP to HTTPS Redirect** | Transport & Encryption | High |
-| 20 | **Mixed Content** | Transport & Encryption | Medium |
+Each topic explains the relevant security configuration, why it matters, the problem that can occur when it is missing, and possible ways to fix it.
 
-Each check returns a status: **PASS**, **WARNING**, **MISSING**, or **REVIEW**.
+Where appropriate, configuration examples are provided for technologies such as:
 
----
+- Nginx
+- Apache
+- Flask
+- Express.js
 
-## 🚀 Installation
+## Technology Stack
 
-### Prerequisites
-- **Python 3.10+**
-- **pip** (Python package manager)
+| Part | Technology |
+|---|---|
+| Backend | Python, Flask |
+| Frontend | HTML5, CSS3, Jinja2 |
+| Scanner | Requests, SSL, Socket, dnspython |
+| PDF Reports | ReportLab |
+| Testing | Python test scripts |
 
-### Steps
+## Project Structure
+
+```text
+ConfigScore/
+│
+├── app.py
+├── requirements.txt
+├── run.py
+├── run.bat
+│
+├── scanner/
+│   ├── __init__.py
+│   ├── engine.py
+│   ├── checks.py
+│   └── report.py
+│
+├── data/
+│   └── topics.json
+│
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── scanner.html
+│   ├── result.html
+│   ├── cyber_security.html
+│   ├── topic.html
+│   ├── insights.html
+│   ├── about.html
+│   └── 404.html
+│
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── script.js
+│   └── img/
+│
+├── test_scanner.py
+└── test_flask_routes.py
+```
+
+## Installation
+
+### Requirements
+
+- Python 3.10 or newer
+- pip
+
+### 1. Clone the repository
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/YOUR_USERNAME/ConfigScore.git
 cd ConfigScore
+```
 
-# 2. Create a virtual environment
+### 2. Create a virtual environment
+
+**Windows:**
+
+```bash
 python -m venv .venv
+.\.venv\Scripts\activate
+```
 
-# 3. Activate the virtual environment
-# Windows (PowerShell):
-.\.venv\Scripts\Activate.ps1
-# Windows (CMD):
-.\.venv\Scripts\activate.bat
-# macOS/Linux:
+**macOS / Linux:**
+
+```bash
+python3 -m venv .venv
 source .venv/bin/activate
+```
 
-# 4. Install dependencies
+### 3. Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
----
+## Running the Project
 
-## 💻 Usage
-
-### Start the Development Server
+You can start the application with:
 
 ```bash
-# Option 1: Run directly
 python app.py
-
-# Option 2: Use Flask CLI
-flask run --port 5050
 ```
 
-The app will start at **http://127.0.0.1:5050/**
-
-### Run a Scan
-1. Open the app in your browser
-2. Navigate to the **Scanner** page
-3. Enter the website URL you want to scan
-4. Click **Start Scan**
-5. View the detailed results with score, findings, and fixes
-6. Download the **PDF report** if needed
-
----
-
-## 🏗️ Project Structure
-
-```
-ConfigScore/
-├── app.py                  # Flask application entry point & routes
-├── requirements.txt        # Python dependencies
-├── run.py                  # Alternative runner script
-├── run.bat                 # Windows batch launcher
-│
-├── scanner/                # Core scanning engine
-│   ├── __init__.py
-│   ├── engine.py           # URL validation, SSRF defense, TLS probing, score calculation
-│   ├── checks.py           # 20 passive security checks implementation
-│   └── report.py           # PDF report generation (ReportLab)
-│
-├── data/
-│   └── topics.json         # Knowledge base for 20 security topics (deep-dive content)
-│
-├── templates/              # Jinja2 HTML templates
-│   ├── base.html           # Base layout (navbar, footer, flash messages)
-│   ├── index.html           # Homepage with hero section & feature pillars
-│   ├── scanner.html        # Scan input form
-│   ├── result.html         # Scan result dashboard
-│   ├── cyber_security.html # Security topics hub (20 topics grouped by category)
-│   ├── topic.html          # Individual topic deep-dive page
-│   ├── insights.html       # Security insights & methodology
-│   ├── about.html          # About page & ethical guidelines
-│   └── 404.html            # Custom error page
-│
-├── static/
-│   ├── css/style.css       # Custom CSS (purple & white theme)
-│   ├── js/script.js        # Client-side JavaScript
-│   └── img/                # Images and illustrations
-│
-├── test_scanner.py         # Unit tests for scanner engine
-└── test_flask_routes.py    # Unit tests for Flask routes
-```
-
----
-
-## 🧪 Running Tests
+Or:
 
 ```bash
-# Run scanner tests
-python -m pytest test_scanner.py -v
-
-# Run route tests
-python -m pytest test_flask_routes.py -v
-
-# Run all tests
-python -m pytest -v
+python run.py
 ```
 
----
+The development server runs locally and can be opened in a browser.
 
-## 🛠️ Tech Stack
+## Running a Scan
 
-| Layer | Technology |
-|-------|-----------|
-| **Backend** | Python 3, Flask 3 |
-| **Frontend** | HTML5, CSS3 (Custom Theme), Jinja2 Templates |
-| **Scanner** | `requests`, `ssl`, `socket`, `dnspython` |
-| **PDF Reports** | ReportLab |
-| **Fonts** | Inter, JetBrains Mono (Google Fonts) |
+1. Open ConfigScore.
+2. Go to the **Scanner** page.
+3. Enter a website URL that you are authorized to test.
+4. Start the scan.
+5. Review the security score and risk level.
+6. Read the individual findings.
+7. Check the recommended fixes.
+8. Download the PDF report if required.
 
----
+## Testing
 
-## 📋 Dependencies
+The project includes tests for scanner functionality and Flask routes.
 
+Run the scanner tests:
+
+```bash
+python test_scanner.py
 ```
-Flask>=3.0.0
-requests>=2.31.0
-reportlab>=4.0.0
-dnspython>=2.6.0
-urllib3>=2.0.0
+
+Run the Flask route tests:
+
+```bash
+python test_flask_routes.py
 ```
 
+## Security and Ethical Use
+
+ConfigScore is intended for **defensive and educational purposes**.
+
+The scanner uses passive HTTP, HTTPS, TLS, cookie, and DNS checks. It should only be used on websites for which you have permission to perform security configuration checks.
+
+The project also includes protection against requests to internal and private network addresses.
+
+## Limitations
+
+ConfigScore is a configuration auditing tool, not a complete penetration-testing system.
+
+A passing score does not mean that a website is completely secure. The scanner focuses on the security configurations implemented by the project and cannot identify every possible vulnerability in a web application.
+
+Some results may also require manual review.
+
+## Project Purpose
+
+This project was created as part of a **B.Sc. Computer Science academic project** to learn and demonstrate:
+
+- Web development with Flask
+- Website security concepts
+- HTTP security headers
+- TLS and certificates
+- Cookie security
+- DNS security
+- Security scoring
+- PDF report generation
+- Basic security testing
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
 ---
 
-## 🤝 Contributing
+**ConfigScore – Website Security Scanner**
 
-Contributions are welcome! Feel free to:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-check`)
-3. Commit your changes (`git commit -m 'Add new security check'`)
-4. Push to the branch (`git push origin feature/new-check`)
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
-
----
-
-## ⚠️ Disclaimer
-
-ConfigScore is an **educational and defensive** security tool. It performs only passive HTTP, TLS, and DNS configuration queries. **Do not** use this tool to scan websites without proper authorization. The developers assume no liability for misuse.
-
----
-
-<div align="center">
-
-**Built with ❤️ by Anita — using Python & Flask**
-
-</div>
+A student project for learning and demonstrating website security configuration auditing.
