@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Website Scanner — ConfigScore{% endblock %}
+{% block title %}Website Security Scanner — ConfigScore{% endblock %}
 
 {% block content %}
 <section class="section scanner-section">
@@ -9,70 +9,49 @@
         <div class="section-header text-center">
             <h1 class="section-title">Website Security Scanner</h1>
             <p class="section-subtitle">
-                Enter any public domain or URL to audit its defensive configuration, HTTP headers, SSL/TLS setup, and cookie policies.
+                Enter a domain or URL to check its HTTP security headers, SSL/TLS configuration, and cookie security flags.
             </p>
         </div>
 
-        <!-- Ethical Disclaimer Notice -->
+        <!-- Authorization Notice -->
         <div class="ethical-notice-card">
-            <div class="notice-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-            </div>
-            <div class="notice-content">
-                <h4 class="notice-title">Important Authorization Notice</h4>
-                <p class="notice-text">
-                    <strong>Only scan websites that you own or have explicit permission to test.</strong> ConfigScore performs safe, passive HTTP/TLS configuration analysis. It does NOT exploit vulnerabilities or perform denial of service attacks.
-                </p>
-            </div>
+            <h4 class="notice-title">Authorization Notice</h4>
+            <p class="notice-text">
+                Please only scan websites that you own or have permission to test. ConfigScore performs safe, passive HTTP requests and TLS handshakes. It does not run automated exploits or attacks.
+            </p>
         </div>
 
         <!-- Scanner Form Card -->
         <div class="scanner-card">
             <form action="{{ url_for('run_scan') }}" method="POST" id="scanForm" class="scan-form">
-                <label for="urlInput" class="form-label">Website URL or Domain Name</label>
+                <label for="urlInput" class="form-label">Website Domain or URL</label>
                 <div class="input-group">
-                    <span class="input-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="2" y1="12" x2="22" y2="12"></line>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                        </svg>
-                    </span>
                     <input
                         type="text"
                         name="url"
                         id="urlInput"
                         class="form-control"
-                        placeholder="https://example.com or example.com"
+                        placeholder="example.com or https://example.com"
                         required
                         autocomplete="off"
                         autofocus
                     >
                     <button type="submit" id="scanSubmitBtn" class="btn btn-primary btn-submit">
                         <span class="btn-text">Audit Website</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
                     </button>
                 </div>
-
             </form>
 
-            <!-- Live Progress Animation (Hidden by default, shown during scan) -->
+            <!-- Loading Spinner (Hidden by default, shown during scan) -->
             <div id="scanLoading" class="scan-loading-wrapper" style="display: none;">
                 <div class="loading-spinner"></div>
-                <h3 class="loading-title">Auditing Target Configuration...</h3>
-                <p id="loadingStatus" class="loading-status">Initiating safe connection to host...</p>
+                <h3 class="loading-title">Scanning Target Website...</h3>
+                <p id="loadingStatus" class="loading-status">Connecting to host and analyzing headers...</p>
                 <div class="loading-steps">
-                    <span class="step-item active">1. Host Resolution & SSRF Check</span>
-                    <span class="step-item">2. TLS Handshake Probing</span>
-                    <span class="step-item">3. HTTP Header Analysis</span>
-                    <span class="step-item">4. Scoring & Report Calculation</span>
+                    <span class="step-item active">1. Host Resolution</span>
+                    <span class="step-item">2. TLS Check</span>
+                    <span class="step-item">3. HTTP Headers</span>
+                    <span class="step-item">4. Scoring</span>
                 </div>
             </div>
         </div>
@@ -80,45 +59,25 @@
         <!-- Scope & Safety Information -->
         <div class="scanner-info-grid">
             <div class="info-card">
-                <div class="info-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                </div>
-                <h4>Safe Passive Checks</h4>
-                <p>ConfigScore acts like a standard browser request, recording response headers and certificate attributes without sending attack payloads.</p>
+                <h4>Passive Checks</h4>
+                <p>ConfigScore makes standard HTTP requests like a web browser to inspect response headers without injecting payloads.</p>
             </div>
 
             <div class="info-card">
-                <div class="info-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
-                    </svg>
-                </div>
                 <h4>Anti-SSRF Protection</h4>
-                <p>Private IP ranges (RFC 1918), loopback interfaces, cloud metadata endpoints, and internal network hostnames are strictly blocked.</p>
+                <p>Private IP ranges (RFC 1918), local loopback addresses, and internal network hosts are blocked for safety.</p>
             </div>
 
             <div class="info-card">
-                <div class="info-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                    </svg>
-                </div>
-                <h4>Instant PDF Report</h4>
-                <p>A comprehensive PDF security report is generated after each scan for easy sharing, archiving, and verification with course supervisors.</p>
+                <h4>Downloadable PDF Report</h4>
+                <p>Generates a PDF audit report summarizing the score, findings, and fix recommendations for submission or archiving.</p>
             </div>
         </div>
 
         <!-- Recent Scans Section -->
         {% if recent_scans %}
         <div class="recent-scans-card">
-            <h3 class="recent-title">Recent Scans in This Session</h3>
+            <h3 class="recent-title">Recent Scans</h3>
             <div class="recent-table-wrapper">
                 <table class="recent-table">
                     <thead>
@@ -133,7 +92,7 @@
                     <tbody>
                         {% for r in recent_scans %}
                         <tr>
-                            <td class="font-mono"><strong>{{ r.hostname }}</strong></td>
+                            <td><strong>{{ r.hostname }}</strong></td>
                             <td>
                                 <span class="score-badge {% if r.score >= 90 %}score-good{% elif r.score >= 70 %}score-med{% else %}score-bad{% endif %}">
                                     {{ r.score }}/100
