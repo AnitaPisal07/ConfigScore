@@ -1,75 +1,51 @@
 {% extends "base.html" %}
 
-{% block title %}ConfigScore — Know How Secure Your Website Is{% endblock %}
+{% block title %}ConfigScore — Website Security Scanner{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
 <section class="hero-section">
     <div class="container hero-container">
         <div class="hero-content">
-            <div class="hero-badge">
-                <span class="badge-dot"></span> Automated Security Auditor & Scanner
-            </div>
+            <span class="hero-badge">B.Sc. Computer Science Project</span>
             <h1 class="hero-title">
-                Know how secure your <span class="text-purple">website</span> really is.
+                Know how secure your website configuration is.
             </h1>
             <p class="hero-description">
-                ConfigScore is an automated defensive security assessment tool. It performs passive, safe configuration audits on target websites—evaluating HTTP security headers, TLS handshakes, cookie protections, and DNS policies to identify gaps in your defensive posture.
+                ConfigScore checks common security configurations and gives you a simple security score, findings, and practical recommendations.
             </p>
             <div class="hero-actions">
                 <a href="{{ url_for('scanner') }}" class="btn btn-primary btn-lg">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    Start Scan
+                    Start Security Scan
                 </a>
                 <a href="{{ url_for('cyber_security') }}" class="btn btn-secondary btn-lg">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                    </svg>
-                    Learn Security
+                    Learn Security Topics
                 </a>
             </div>
 
             <div class="hero-guarantee">
-                <span class="guarantee-item">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Passive checks only
-                </span>
-                <span class="guarantee-item">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    20 security controls
-                </span>
-                <span class="guarantee-item">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    PDF audit report
-                </span>
+                <span class="guarantee-item">✓ Passive checks only</span>
+                <span class="guarantee-item">✓ 20 security controls</span>
+                <span class="guarantee-item">✓ Downloadable PDF report</span>
             </div>
         </div>
 
-        <!-- Interactive Score Example Card -->
+        <!-- Sample Score Preview Card -->
         <div class="hero-preview">
             <div class="preview-card">
                 <div class="preview-header">
-                    <div class="preview-dots">
-                        <span class="dot dot-red"></span>
-                        <span class="dot dot-yellow"></span>
-                        <span class="dot dot-green"></span>
-                    </div>
-                    <span class="preview-title">Sample Audit — secure-portal.org</span>
+                    <span class="preview-title">Sample Audit Report — example.com</span>
                 </div>
 
                 <div class="preview-body">
                     <div class="score-banner-compact">
-                        <div class="score-circle-sm" data-score="92">
+                        <div class="score-circle-sm">
                             <span class="score-number-sm">92</span>
                             <span class="score-total-sm">/100</span>
                         </div>
                         <div class="score-meta-sm">
                             <span class="badge badge-success">Low Risk</span>
-                            <p class="score-meta-text">Strong defense-in-depth posture with minor header optimizations needed.</p>
+                            <p class="score-meta-text">Good security configuration with minor header improvements suggested.</p>
                         </div>
                     </div>
 
@@ -111,100 +87,56 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="preview-footer">
-                    <span>Generated in 1.42s</span>
-                    <span class="preview-link">Click to view full report &rarr;</span>
-                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Feature Pillars (Scan, Detect, Explain, Improve) -->
+<!-- How It Works Section -->
 <section class="section features-section">
     <div class="container">
         <div class="section-header text-center">
-            <h2 class="section-title">How ConfigScore Protects Web Applications</h2>
+            <h2 class="section-title">How ConfigScore Works</h2>
             <p class="section-subtitle">
-                A structured four-step methodology designed for computer science students and web administrators to audit and harden server configurations.
+                A simple four-step process to audit website headers, TLS certificates, and security configurations.
             </p>
         </div>
 
         <div class="features-grid">
             <!-- Feature 1: Scan -->
             <div class="feature-card">
-                <div class="feature-icon feature-purple">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                    </svg>
-                </div>
-                <h3 class="feature-title">1. Passive Scan</h3>
+                <div class="feature-num">1</div>
+                <h3 class="feature-title">Passive Scan</h3>
                 <p class="feature-text">
-                    Safely queries public endpoints, follows HTTP redirect chains, inspects TLS certificates, and analyzes response headers without injecting intrusive exploit payloads.
+                    Sends standard HTTP requests to inspect response headers, HTTPS redirects, TLS certificates, and DNS records safely.
                 </p>
-                <ul class="feature-points">
-                    <li>Strict SSRF safeguards</li>
-                    <li>Certificate chain inspection</li>
-                    <li>DNS CAA record resolution</li>
-                </ul>
             </div>
 
             <!-- Feature 2: Detect -->
             <div class="feature-card">
-                <div class="feature-icon feature-blue">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    </svg>
-                </div>
-                <h3 class="feature-title">2. Detect Weaknesses</h3>
+                <div class="feature-num">2</div>
+                <h3 class="feature-title">Detect Weaknesses</h3>
                 <p class="feature-text">
-                    Evaluates 20 essential cybersecurity controls against industry standards (OWASP, RFCs, NIST), calculating an objective score from 0 to 100 with clear risk levels.
+                    Evaluates 20 common security controls against security guidelines (OWASP, RFCs) and calculates a score from 0 to 100.
                 </p>
-                <ul class="feature-points">
-                    <li>Weighted deduction algorithm</li>
-                    <li>Clickjacking & XSS checks</li>
-                    <li>Cookie attribute parsing</li>
-                </ul>
             </div>
 
             <!-- Feature 3: Explain -->
             <div class="feature-card">
-                <div class="feature-icon feature-amber">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                    </svg>
-                </div>
-                <h3 class="feature-title">3. Deep Dive Explanations</h3>
+                <div class="feature-num">3</div>
+                <h3 class="feature-title">Clear Explanations</h3>
                 <p class="feature-text">
-                    Every finding links to a dedicated academic deep-dive explaining what the configuration is, why it matters, and what attack scenario occurs when it is absent.
+                    Every finding includes a simple explanation of what was checked, why it matters, and what attack risk it prevents.
                 </p>
-                <ul class="feature-points">
-                    <li>20 unique topic pages</li>
-                    <li>Attack impact breakdowns</li>
-                    <li>OWASP reference links</li>
-                </ul>
             </div>
 
             <!-- Feature 4: Improve -->
             <div class="feature-card">
-                <div class="feature-icon feature-green">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="16 18 22 12 16 6"></polyline>
-                        <polyline points="8 6 2 12 8 18"></polyline>
-                    </svg>
-                </div>
-                <h3 class="feature-title">4. Technical Remediation</h3>
+                <div class="feature-num">4</div>
+                <h3 class="feature-title">Fix Guidance</h3>
                 <p class="feature-text">
-                    Provides copy-ready configuration snippets for Nginx, Apache, Node.js/Express, and Python/Flask so developers can immediately patch missing security headers.
+                    Provides practical code snippets for Nginx, Apache, Flask, and Express to fix missing security headers easily.
                 </p>
-                <ul class="feature-points">
-                    <li>Multi-platform code snippets</li>
-                    <li>Exportable PDF audit report</li>
-                    <li>Verification instructions</li>
-                </ul>
             </div>
         </div>
     </div>
@@ -215,14 +147,14 @@
     <div class="container">
         <div class="cta-box">
             <div class="cta-content">
-                <h2 class="cta-title">Ready to assess your website's configuration?</h2>
+                <h2 class="cta-title">Test your website configuration</h2>
                 <p class="cta-subtitle">
-                    Enter your domain name to run a comprehensive 20-point defensive audit in less than 5 seconds.
+                    Enter any domain to run a passive 20-point security audit.
                 </p>
             </div>
             <div class="cta-action">
                 <a href="{{ url_for('scanner') }}" class="btn btn-primary btn-lg">
-                    Launch Scanner Now &rarr;
+                    Go to Scanner →
                 </a>
             </div>
         </div>
