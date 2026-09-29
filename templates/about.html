@@ -1,107 +1,89 @@
 {% extends "base.html" %}
 
-{% block title %}About ConfigScore — Web Security Scanner{% endblock %}
+{% block title %}About Project — ConfigScore{% endblock %}
 
 {% block content %}
 <section class="section about-section">
     <div class="container about-container">
         <!-- Header -->
         <div class="section-header text-center">
-            <div class="hero-badge">
-                <span class="badge-dot"></span> Automated Security Assessment Platform
-            </div>
             <h1 class="section-title">About ConfigScore</h1>
             <p class="section-subtitle">
-                A lightweight, non-intrusive website security scanner built to help developers audit, benchmark, and harden their web applications.
+                A Third Year B.Sc. Computer Science Final Year Project on Web Application Security Configuration Auditing.
             </p>
         </div>
 
-        <!-- Overview Card -->
+        <!-- Project Overview Card -->
         <div class="about-card">
-            <h2 class="about-heading">Our Mission & Approach</h2>
+            <h2 class="about-heading">Project Objective</h2>
             <p>
-                Most web compromises do not begin with exotic zero-day exploits. Instead, they frequently stem from <strong>basic security misconfigurations</strong>: missing security headers, unencrypted plaintext fallbacks, cookies without security attributes, and legacy TLS protocol support.
+                Web application security issues often occur not from complex application zero-day flaws, but from basic <strong>server misconfigurations</strong> — such as missing security headers (CSP, HSTS, X-Frame-Options), insecure cookie flags, or unencrypted HTTP fallbacks.
             </p>
             <p>
-                While commercial security scanners exist, many are closed-source, expensive, or provide cryptic error messages without clearly explaining <em>why</em> a configuration matters or <em>how</em> to fix it. <strong>ConfigScore</strong> was created to bridge this gap by providing an open, transparent, and developer-friendly auditing platform with actionable, copy-paste fixes.
+                <strong>ConfigScore</strong> was developed to demonstrate passive, non-intrusive security auditing. It queries public target domains like a web browser, evaluates 20 critical configuration controls, calculates a clear risk score, and provides practical code snippets for developers to fix missing security controls.
             </p>
         </div>
 
         <!-- Two Column Details -->
         <div class="about-grid">
             <div class="about-card">
-                <h3 class="about-card-title">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    What ConfigScore Does
-                </h3>
+                <h3 class="about-card-title">What ConfigScore Does</h3>
                 <ul class="about-list">
-                    <li><strong>Passive Configuration Auditing:</strong> Safely queries target endpoints like a browser to record and evaluate response headers.</li>
-                    <li><strong>TLS & Certificate Inspection:</strong> Probes handshake protocols (TLS 1.2/1.3), cipher suites, certificate validity, and expiration horizons.</li>
-                    <li><strong>Cookie Security Verification:</strong> Checks session cookies for <code>Secure</code>, <code>HttpOnly</code>, and <code>SameSite</code> protection flags.</li>
-                    <li><strong>Redirect Chain Tracing:</strong> Evaluates whether plaintext HTTP gracefully transitions to HTTPS without unencrypted downgrade hops.</li>
-                    <li><strong>DNS Governance Check:</strong> Resolves CAA records to verify Certificate Authority authorization policies.</li>
-                    <li><strong>Remediation Generation:</strong> Provides concrete configuration directives for Nginx, Apache, Flask, and Express.</li>
+                    <li><strong>Passive Auditing:</strong> Inspects HTTP response headers safely without running intrusive attack payloads.</li>
+                    <li><strong>TLS &amp; Certificate Check:</strong> Evaluates SSL/TLS versions (TLS 1.2/1.3), certificate validity, and expiration horizons.</li>
+                    <li><strong>Cookie Security Verification:</strong> Audits session cookies for <code>Secure</code>, <code>HttpOnly</code>, and <code>SameSite</code> flags.</li>
+                    <li><strong>Redirect Chain Tracing:</strong> Evaluates plaintext HTTP to HTTPS redirect paths.</li>
+                    <li><strong>DNS CAA Resolution:</strong> Queries DNS CAA records to verify authorized Certificate Authorities.</li>
+                    <li><strong>Remediation Directives:</strong> Provides ready-to-use configuration directives for Nginx, Apache, Flask, and Express.</li>
                 </ul>
             </div>
 
             <div class="about-card">
-                <h3 class="about-card-title">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
-                        <line x1="12" y1="8" x2="12" y2="12"></line>
-                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                    </svg>
-                    Important Limitations
-                </h3>
+                <h3 class="about-card-title">Project Limitations</h3>
                 <ul class="about-list">
-                    <li><strong>Not a Penetration Test:</strong> ConfigScore does not attempt SQL injection, brute-force logins, remote code execution, or fuzzing.</li>
-                    <li><strong>Landing Page Scope:</strong> Automated checks evaluate the initial public landing page. Deeply authenticated pages and internal microservices require manual assessment.</li>
-                    <li><strong>No DOM Dynamic Rendering:</strong> Checks are performed over raw HTTP/TLS streams; complex single-page apps (SPAs) that generate DOM elements via clientside JavaScript may need browser DevTools verification.</li>
-                    <li><strong>Review Status:</strong> When a check cannot be reliably determined remotely (such as no cookies set on a public landing page), ConfigScore marks it as <strong>"Review Required"</strong> rather than fabricating a result.</li>
+                    <li><strong>No Exploitation:</strong> ConfigScore does not perform SQL injection, XSS payload testing, or brute-force attacks.</li>
+                    <li><strong>Public Landing Page Scope:</strong> Automated checks audit public endpoints. Internal authentication systems require manual review.</li>
+                    <li><strong>No Dynamic DOM Execution:</strong> Checks raw HTTP/TLS network responses; client-side JavaScript DOM rendering is not executed.</li>
+                    <li><strong>Review Status:</strong> When a check cannot be verified remotely (e.g. no cookies set on landing page), it is marked as <strong>"Review Required"</strong>.</li>
                 </ul>
             </div>
         </div>
 
         <!-- Technology Stack -->
         <div class="about-card">
-            <h3 class="about-card-title">Technology Architecture</h3>
+            <h3 class="about-card-title">Technologies Used</h3>
             <div class="tech-stack-grid">
                 <div class="tech-item">
                     <span class="tech-label">Backend</span>
                     <span class="tech-val">Python 3 &amp; Flask</span>
-                    <p class="tech-desc">Lightweight WSGI framework managing routing, session management, and template rendering.</p>
+                    <p class="tech-desc">Handles web routing, request handling, and server-side template rendering.</p>
                 </div>
                 <div class="tech-item">
-                    <span class="tech-label">Scanning Engine</span>
-                    <span class="tech-val">Python Requests &amp; SSL/Socket</span>
-                    <p class="tech-desc">Safe passive HTTP client, socket-level TLS SNI probing, and dnspython for CAA resolution.</p>
+                    <span class="tech-label">Scanner Engine</span>
+                    <span class="tech-val">Requests, SSL &amp; Socket</span>
+                    <p class="tech-desc">Performs passive HTTP client calls, socket TLS handshake probing, and dnspython CAA queries.</p>
                 </div>
                 <div class="tech-item">
                     <span class="tech-label">PDF Generator</span>
-                    <span class="tech-val">ReportLab Platypus</span>
-                    <p class="tech-desc">Programmatic document template engine generating structured, downloadable audit reports.</p>
+                    <span class="tech-val">ReportLab</span>
+                    <p class="tech-desc">Generates formatted PDF audit report documents programmatically.</p>
                 </div>
                 <div class="tech-item">
                     <span class="tech-label">Frontend</span>
-                    <span class="tech-val">HTML5, Modern CSS3 &amp; Vanilla JS</span>
-                    <p class="tech-desc">Custom dark-themed cybersecurity interface with responsive layouts and accessible contrast.</p>
+                    <span class="tech-val">HTML5, Custom CSS3 &amp; JavaScript</span>
+                    <p class="tech-desc">Clean responsive interface with accessible styling and interactive tab filtering.</p>
                 </div>
             </div>
         </div>
 
         <!-- Ethical & Legal Usage Policy -->
         <div class="about-card ethical-policy-card">
-            <h3 class="about-card-title text-purple">Ethical &amp; Legal Usage Policy</h3>
+            <h3 class="about-card-title text-purple">Ethical &amp; Legal Notice</h3>
             <p>
-                ConfigScore is engineered strictly for authorized, defensive cybersecurity analysis and educational research.
+                ConfigScore is developed strictly for educational research and authorized defensive security checks.
             </p>
-            <blockquote class="about-quote">
-                "ConfigScore performs passive security configuration checks. It is not a replacement for a comprehensive manual security assessment or professional penetration test."
-            </blockquote>
             <p>
-                Users must ensure that they either own the website being scanned or have obtained written authorization from the domain administrator. The developers of ConfigScore assume no liability for unauthorized or misuse of this tool.
+                Only scan web applications that you own or have explicit permission to test. Passive configuration auditing should be used as a helpful baseline check alongside proper software development practices.
             </p>
         </div>
 
