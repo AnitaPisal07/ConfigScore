@@ -1,78 +1,69 @@
 {% extends "base.html" %}
 
-{% block title %}Security Insights & Defense Architecture — ConfigScore{% endblock %}
+{% block title %}Security Insights & Best Practices — ConfigScore{% endblock %}
 
 {% block content %}
 <section class="section insights-section">
     <div class="container">
         <!-- Header -->
         <div class="section-header text-center">
-            <div class="hero-badge">
-                <span class="badge-dot"></span> Web Security Best Practices
-            </div>
             <h1 class="section-title">Security Insights & Best Practices</h1>
             <p class="section-subtitle">
-                Understanding defense-in-depth, browser security boundaries, secure cookie lifecycles, and how the ConfigScore evaluation algorithm works.
+                Understanding defense-in-depth, browser security boundaries, cookie attributes, and the ConfigScore scoring algorithm.
             </p>
         </div>
 
-        <!-- Section 1: The Browser-Server Defense Perimeter -->
+        <!-- Section 1: Defense-in-Depth -->
         <div class="insight-card">
             <div class="insight-header">
-                <div class="insight-badge-num">01</div>
-                <div>
-                    <h2 class="insight-title">The Defense-in-Depth Model for Web Applications</h2>
-                    <p class="insight-subtitle">Why application code security alone is never enough.</p>
-                </div>
+                <h2 class="insight-title">1. The Defense-in-Depth Model</h2>
+                <p class="insight-subtitle">Why server configuration headers are essential client-side guardrails.</p>
             </div>
             <div class="insight-body">
                 <p>
-                    Modern web security relies on <strong>defense-in-depth</strong>. Even if a developer uses modern web frameworks with built-in protections against SQL injection or template escaping, a single overlooked parameter or third-party script can introduce vulnerabilities.
+                    Modern web security relies on <strong>defense-in-depth</strong>. Even if application source code avoids SQL injection or XSS bugs, a single missing security parameter can leave users vulnerable.
                 </p>
                 <p>
-                    HTTP security headers act as <strong>client-side guardrails</strong>. When a web server returns proper headers (such as CSP, HSTS, and X-Content-Type-Options), it instructs the user's browser to enforce strict operational rules—rendering entire categories of attacks inert even if an injection vulnerability exists in the backend code.
+                    HTTP security headers act as <strong>client-side guardrails</strong>. When a web server returns proper headers (such as CSP, HSTS, and X-Content-Type-Options), it instructs the user's browser to enforce strict operational rules.
                 </p>
 
                 <div class="layers-grid">
                     <div class="layer-box">
                         <span class="layer-step">Layer 1</span>
                         <h4 class="layer-name">Transport Encryption (TLS/HTTPS)</h4>
-                        <p class="layer-text">Protects data across the network wire. Defends against packet sniffing, Wi-Fi eavesdropping, and ARP cache poisoning.</p>
+                        <p class="layer-text">Protects data in transit across public networks against packet sniffing and eavesdropping.</p>
                     </div>
 
                     <div class="layer-box">
                         <span class="layer-step">Layer 2</span>
-                        <h4 class="layer-name">Browser Boundary Hardening</h4>
-                        <p class="layer-text">HSTS, CSP, X-Frame-Options, and Referrer-Policy enforce strict execution constraints inside the client browser runtime.</p>
+                        <h4 class="layer-name">Browser Execution Restrictions</h4>
+                        <p class="layer-text">HSTS, CSP, X-Frame-Options, and Referrer-Policy enforce browser execution constraints.</p>
                     </div>
 
                     <div class="layer-box">
                         <span class="layer-step">Layer 3</span>
-                        <h4 class="layer-name">Session & Cookie Isolation</h4>
-                        <p class="layer-text">HttpOnly, Secure, and SameSite attributes ensure session tokens cannot be stolen via XSS or forged via CSRF.</p>
+                        <h4 class="layer-name">Session &amp; Cookie Isolation</h4>
+                        <p class="layer-text">HttpOnly, Secure, and SameSite flags protect session cookies against theft or forgery.</p>
                     </div>
 
                     <div class="layer-box">
                         <span class="layer-step">Layer 4</span>
-                        <h4 class="layer-name">Domain & DNS Governance</h4>
-                        <p class="layer-text">CAA records and SPF/DMARC specify which Certificate Authorities and mail servers are authorized on behalf of the domain.</p>
+                        <h4 class="layer-name">Domain &amp; DNS Governance</h4>
+                        <p class="layer-text">CAA records designate authorized Certificate Authorities for the domain.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Section 2: Scoring Algorithm Explanation -->
+        <!-- Section 2: Scoring Algorithm -->
         <div class="insight-card" id="scoring">
             <div class="insight-header">
-                <div class="insight-badge-num">02</div>
-                <div>
-                    <h2 class="insight-title">The ConfigScore Scoring Algorithm</h2>
-                    <p class="insight-subtitle">Transparent, objective, and reproducible evaluation mechanics.</p>
-                </div>
+                <h2 class="insight-title">2. ConfigScore Scoring Algorithm</h2>
+                <p class="insight-subtitle">Deterministic deduction model starting from 100 points.</p>
             </div>
             <div class="insight-body">
                 <p>
-                    ConfigScore uses a deterministic deduction model. Every audited website begins with a perfect baseline score of <strong>100 points</strong>. Points are subtracted based on the severity and criticality of any missing or improperly configured defensive controls:
+                    ConfigScore uses a weighted deduction algorithm. Every audited website begins with a baseline score of <strong>100 points</strong>. Points are subtracted based on the severity of missing or misconfigured security controls:
                 </p>
 
                 <div class="table-responsive">
@@ -81,7 +72,7 @@
                             <tr>
                                 <th>Severity Tier</th>
                                 <th>Point Deduction</th>
-                                <th>Security Controls Included</th>
+                                <th>Controls Included</th>
                                 <th>Rationale</th>
                             </tr>
                         </thead>
@@ -89,26 +80,26 @@
                             <tr>
                                 <td><span class="badge badge-danger">Critical</span></td>
                                 <td class="font-mono text-danger font-bold">-10 to -15 pts</td>
-                                <td>HTTPS, Valid Certificate, Modern TLS Protocol, Content Security Policy</td>
-                                <td>Fundamental transport integrity or primary defense against code execution.</td>
+                                <td>HTTPS, Valid Certificate, Modern TLS, Content Security Policy</td>
+                                <td>Fundamental transport integrity or primary defense against code injection.</td>
                             </tr>
                             <tr>
                                 <td><span class="badge badge-orange">High</span></td>
                                 <td class="font-mono text-orange font-bold">-6 to -8 pts</td>
-                                <td>HSTS, X-Frame-Options, Secure Cookies, HttpOnly Cookies, CORS Credentials</td>
+                                <td>HSTS, X-Frame-Options, Secure Cookies, HttpOnly Cookies</td>
                                 <td>Direct exposure to session hijacking, clickjacking, or SSL-stripping.</td>
                             </tr>
                             <tr>
                                 <td><span class="badge badge-warning">Medium</span></td>
                                 <td class="font-mono text-warning font-bold">-4 to -5 pts</td>
-                                <td>X-Content-Type-Options, Referrer-Policy, SameSite Cookies, DNS CAA Records</td>
-                                <td>Protection against MIME-confusion, cross-site CSRF, and referrer leakage.</td>
+                                <td>X-Content-Type-Options, Referrer-Policy, SameSite Cookies, DNS CAA</td>
+                                <td>Protection against MIME sniffing, CSRF, and referrer data leakage.</td>
                             </tr>
                             <tr>
                                 <td><span class="badge badge-info">Low</span></td>
                                 <td class="font-mono text-info font-bold">-1 to -3 pts</td>
                                 <td>Permissions-Policy, Server Disclosure, Cache-Control</td>
-                                <td>Minimizes device API access, reconnaissance fingerprinting, and cache retention.</td>
+                                <td>Minimizes browser API access, server fingerprinting, and cache exposure.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -118,22 +109,22 @@
                     <div class="tier-card tier-low">
                         <span class="tier-range">90 – 100</span>
                         <span class="tier-name">Low Risk</span>
-                        <p class="tier-desc">Well-hardened configuration following modern security best practices.</p>
+                        <p class="tier-desc">Strong security posture following web best practices.</p>
                     </div>
                     <div class="tier-card tier-med">
                         <span class="tier-range">70 – 89</span>
                         <span class="tier-name">Medium Risk</span>
-                        <p class="tier-desc">Satisfactory baseline, but missing specific defense-in-depth headers.</p>
+                        <p class="tier-desc">Acceptable baseline, but missing specific defensive headers.</p>
                     </div>
                     <div class="tier-card tier-high">
                         <span class="tier-range">40 – 69</span>
                         <span class="tier-name">High Risk</span>
-                        <p class="tier-desc">Multiple important protections missing; immediate remediation advised.</p>
+                        <p class="tier-desc">Multiple important protections missing; remediation recommended.</p>
                     </div>
                     <div class="tier-card tier-crit">
                         <span class="tier-range">0 – 39</span>
                         <span class="tier-name">Critical Risk</span>
-                        <p class="tier-desc">Severely exposed to active network eavesdropping, MitM, or framing.</p>
+                        <p class="tier-desc">Missing basic transport security or crucial framing/script protections.</p>
                     </div>
                 </div>
             </div>
@@ -142,51 +133,48 @@
         <!-- Section 3: Secure Website Checklist -->
         <div class="insight-card">
             <div class="insight-header">
-                <div class="insight-badge-num">03</div>
-                <div>
-                    <h2 class="insight-title">Production Website Security Checklist</h2>
-                    <p class="insight-subtitle">10 essential configuration steps before deploying any website to production.</p>
-                </div>
+                <h2 class="insight-title">3. Production Website Security Checklist</h2>
+                <p class="insight-subtitle">10 essential steps to harden server configurations before deployment.</p>
             </div>
             <div class="insight-body">
                 <div class="checklist-grid">
                     <div class="check-box">
                         <span class="check-box-num">1</span>
                         <div>
-                            <strong>Enforce HTTPS with Automated Renewal:</strong>
-                            <p>Configure Let's Encrypt with Certbot cron or cloud ACM so certificates renew automatically at least 30 days before expiration.</p>
+                            <strong>Enforce HTTPS:</strong>
+                            <p>Configure Let's Encrypt or ACM certificates and ensure automatic renewal.</p>
                         </div>
                     </div>
 
                     <div class="check-box">
                         <span class="check-box-num">2</span>
                         <div>
-                            <strong>Disable Obsolete TLS Protocols:</strong>
-                            <p>Set web server configuration to support only TLS 1.2 and TLS 1.3. Explicitly disable SSLv2, SSLv3, TLS 1.0, and TLS 1.1.</p>
+                            <strong>Disable Obsolete TLS Versions:</strong>
+                            <p>Support TLS 1.2 and TLS 1.3 only. Disable SSLv2, SSLv3, TLS 1.0, and TLS 1.1.</p>
                         </div>
                     </div>
 
                     <div class="check-box">
                         <span class="check-box-num">3</span>
                         <div>
-                            <strong>Activate HTTP Strict Transport Security (HSTS):</strong>
-                            <p>Send <code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code> to stop SSL-stripping.</p>
+                            <strong>Enable HSTS:</strong>
+                            <p>Send <code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code>.</p>
                         </div>
                     </div>
 
                     <div class="check-box">
                         <span class="check-box-num">4</span>
                         <div>
-                            <strong>Block Clickjacking with Frame Restrictions:</strong>
-                            <p>Deploy <code>X-Frame-Options: DENY</code> and CSP <code>frame-ancestors 'none'</code> on sensitive pages.</p>
+                            <strong>Prevent Clickjacking:</strong>
+                            <p>Set <code>X-Frame-Options: DENY</code> and CSP <code>frame-ancestors 'none'</code>.</p>
                         </div>
                     </div>
 
                     <div class="check-box">
                         <span class="check-box-num">5</span>
                         <div>
-                            <strong>Prevent MIME-Type Sniffing:</strong>
-                            <p>Always declare <code>X-Content-Type-Options: nosniff</code> to prevent browsers from executing polyglot uploads.</p>
+                            <strong>Prevent MIME Sniffing:</strong>
+                            <p>Set <code>X-Content-Type-Options: nosniff</code> on all HTTP responses.</p>
                         </div>
                     </div>
 
@@ -194,23 +182,23 @@
                         <span class="check-box-num">6</span>
                         <div>
                             <strong>Control Referrer Leakage:</strong>
-                            <p>Use <code>Referrer-Policy: strict-origin-when-cross-origin</code> so query parameters are not transmitted to third parties.</p>
+                            <p>Use <code>Referrer-Policy: strict-origin-when-cross-origin</code>.</p>
                         </div>
                     </div>
 
                     <div class="check-box">
                         <span class="check-box-num">7</span>
                         <div>
-                            <strong>Harden Session Cookies:</strong>
-                            <p>Set <code>Secure</code>, <code>HttpOnly</code>, and <code>SameSite=Lax</code> (or <code>Strict</code>) on all authentication cookies.</p>
+                            <strong>Harden Cookie Flags:</strong>
+                            <p>Set <code>Secure</code>, <code>HttpOnly</code>, and <code>SameSite=Lax</code> (or <code>Strict</code>) on cookies.</p>
                         </div>
                     </div>
 
                     <div class="check-box">
                         <span class="check-box-num">8</span>
                         <div>
-                            <strong>Suppress Server Fingerprints:</strong>
-                            <p>Turn off <code>server_tokens</code> in Nginx and disable <code>X-Powered-By</code> in Express/PHP.</p>
+                            <strong>Suppress Server Banners:</strong>
+                            <p>Turn off <code>server_tokens</code> in Nginx and disable <code>X-Powered-By</code> in backend frameworks.</p>
                         </div>
                     </div>
 
@@ -218,15 +206,15 @@
                         <span class="check-box-num">9</span>
                         <div>
                             <strong>Publish DNS CAA Records:</strong>
-                            <p>Restrict certificate issuance in your DNS provider zone to only your designated Certificate Authority.</p>
+                            <p>Restrict certificate issuance in your DNS provider zone to designated Certificate Authorities.</p>
                         </div>
                     </div>
 
                     <div class="check-box">
                         <span class="check-box-num">10</span>
                         <div>
-                            <strong>Craft a Phased Content Security Policy:</strong>
-                            <p>Start with CSP in Report-Only mode, eliminate inline scripts using nonces, and then switch to enforcing mode.</p>
+                            <strong>Configure Content Security Policy (CSP):</strong>
+                            <p>Define clear script-src, style-src, and object-src directives to block unauthorized script execution.</p>
                         </div>
                     </div>
                 </div>

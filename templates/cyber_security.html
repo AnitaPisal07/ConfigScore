@@ -1,17 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Cyber Security Knowledge Hub — 20 Security Controls — ConfigScore{% endblock %}
+{% block title %}Cyber Security Knowledge Hub — ConfigScore{% endblock %}
 
 {% block content %}
 <section class="section cyber-hub-section">
     <div class="container">
         <div class="section-header text-center">
-            <div class="hero-badge">
-                <span class="badge-dot"></span> Security Controls & Standards Guide
-            </div>
             <h1 class="section-title">Cyber Security Knowledge Hub</h1>
             <p class="section-subtitle">
-                Explore comprehensive deep dives into all 20 passive security controls evaluated by ConfigScore. Each topic explains the underlying threat model, vulnerability scenarios, and configuration remediation.
+                Study details on all 20 security controls audited by ConfigScore. Each topic includes threat models, vulnerability impacts, and server fix configurations.
             </p>
         </div>
 
@@ -42,26 +39,22 @@
                     <p class="topic-card-desc">{{ topic.short_description }}</p>
 
                     <div class="topic-card-footer">
-                        <span class="topic-weight">Weight: {{ topic.weight }} pts</span>
-                        <a href="{{ url_for('topic_detail', slug=topic.slug) }}" class="btn btn-sm btn-outline btn-deep-dive">
-                            Deep Dive
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
+                        <span class="topic-weight">Deduction: -{{ topic.weight }} pts</span>
+                        <a href="{{ url_for('topic_detail', slug=topic.slug) }}" class="btn btn-sm btn-outline">
+                            View Topic →
                         </a>
                     </div>
                 </div>
             {% endfor %}
         </div>
 
-        <!-- Defensive Guidance Banner -->
+        <!-- Banner -->
         <div class="defense-banner-box">
             <div class="defense-banner-content">
-                <h3>Want to test these controls on your website?</h3>
-                <p>Launch an automated passive scan to verify which of these 20 controls are correctly configured on your server.</p>
+                <h3>Test these security controls</h3>
+                <p>Run a passive scan on your domain to check which of these 20 controls are configured.</p>
             </div>
-            <a href="{{ url_for('scanner') }}" class="btn btn-primary">Start Website Audit &rarr;</a>
+            <a href="{{ url_for('scanner') }}" class="btn btn-primary">Start Audit Now →</a>
         </div>
 
     </div>
